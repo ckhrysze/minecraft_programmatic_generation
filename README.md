@@ -1,0 +1,3 @@
+# Programmatic Minecraft World Creation #
+
+With the introduction of the 'fill' and 'clone' commands, I realized there was a lot of potential to write scripts to generate various structures within Minecraft. My initial searches yielded mods to help create content from within the game, but that was not was I wanted. This process started as a desire to generate a random maze, but I intend for it to grow into a collection of utilities to create all sorts of things automatically.
