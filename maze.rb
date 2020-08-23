@@ -39,7 +39,7 @@ def expand_into_blocks(grid, material)
   passage_width = 3
   wall_width = 1
   multiplier = passage_width + wall_width
-  
+
   grid_length = grid.size
   grid_width = grid[0].size
 
@@ -57,7 +57,7 @@ def expand_into_blocks(grid, material)
           blocks[block_z+i][block_x+j] = nil
         end
       end
-      
+
       if grid[z][x] & S != 0
         passage_width.times do |i|
           blocks[block_z + passage_width][block_x + i] = nil
@@ -71,23 +71,32 @@ def expand_into_blocks(grid, material)
       end
     end
   end
-  
+
   blocks
 end
 
 grid = create_maze(width, length)
-blocks = expand_into_blocks(grid, "minecraft:stonebrick")
+blocks = expand_into_blocks(grid, "stone")
+
+map_file = File.open("map.txt", "w")
+maze_file =  File.open("maze.txt", "w")
+
 
 blocks.size.times do |z|
   blocks[z].size.times do |x|
     if blocks[z][x].nil?
-      print ' '
+      map_file.print ' '
     else
-      print 'X'
+      fill_command = ["fill", z, "~", x, z, "~+3", x, "stone"]
+      maze_file.puts(fill_command.join(" "))
+      map_file.print 'X'
     end
   end
-  puts
+  map_file.puts
 end
+
+map_file.close()
+maze_file.close()
 
 puts
 puts "#{$0} #{width} #{length} #{seed}"
